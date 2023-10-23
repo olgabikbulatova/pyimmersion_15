@@ -11,11 +11,11 @@
 import os
 import logging
 from collections import namedtuple
+import argparse
 
 FORMAT = '{levelname} - {msg}'
 logging.basicConfig(filename='mylog.log', filemode='w', encoding='utf-8', style='{', format=FORMAT, level=logging.INFO)
 logger = logging.getLogger(__name__)
-
 
 DirTree = namedtuple('DirTree', ['name', 'extension', 'parent_fold'])
 
@@ -32,7 +32,11 @@ def dirtree_info(path: str = os.getcwd()):
 
 
 if __name__ == '__main__':
-    dirtree_info()
+    parser = argparse.ArgumentParser(description='Dirtree_info parser')
+    parser.add_argument('path', metavar='P', type=str, nargs='*', help='enter directory absolute path')
+    args = parser.parse_args()
+    print(dirtree_info(*args.path))
+
 
 
 
